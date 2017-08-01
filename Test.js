@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const Test = mongoose.model('Test', {
-	test: Array 
+	test: Array,
+	testId: String
 }, 'tests')
 
 // IMPORTANT: This model is not actually being used right now.
