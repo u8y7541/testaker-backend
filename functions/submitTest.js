@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const Test = require('./Test')
-const SessionStorage = require('./SessionStorage')
+const Test = require('../models/Test')
+const SessionStorage = require('../classes/SessionStorage')
 
 const setTest = (req, res) => {
 	// First check if the request is legit

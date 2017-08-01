@@ -1,5 +1,5 @@
 mongoose = require('mongoose')
-Test = require('./Test')
+Test = require('../models/Test')
 
 mongoose.Promise = global.Promise
 
