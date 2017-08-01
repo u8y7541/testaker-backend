@@ -1,9 +1,11 @@
 mongoose = require('mongoose')
 Test = require('./Test')
 
+mongoose.Promise = global.Promise
+
 const create = async (req, res) => {
 	// Check if a test with the same ID exists
-	ok = false // True if there's no test with the same ID
+	let ok = false // True if there's no test with the same ID
 	await Test.findOne({"testId": req.query.id},
 		(err, test) => {
 			if (err) {

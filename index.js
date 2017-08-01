@@ -8,7 +8,7 @@ const getTest = require('./getTest')
 const submitTest = require('./submitTest')
 const createTest = require('./createTest')
 
-mongoose.connect('mongodb://localhost:27017/tests')
+mongoose.connect('mongodb://localhost:27017/tests', {useMongoClient: true})
 
 const app = express()
 
