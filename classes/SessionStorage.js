@@ -1,3 +1,7 @@
+// SessionStorage holds pairs of names and IPs of test takers. There is one
+// SessionStorage object per test session. SessionStorage ensures that you can only
+// submitTest if you have done getTest, and you cannot submit a test twice.
+
 // This is just an abstraction from a 2D array
 class SessionStorage {
 	constructor(testId) {

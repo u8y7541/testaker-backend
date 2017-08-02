@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// Test database model
 const Test = mongoose.model('Test', {
 	test: Array,
 	testId: String
