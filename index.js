@@ -13,6 +13,7 @@ const createTest = require('./functions/createTest')
 mongoose.connect('mongodb://localhost:27017/tests', {useMongoClient: true})
 
 const app = express()
+app.set('trust proxy', 'loopback')
 
 // Setting up endpoints
 app.post('/getTest', getTest)
