@@ -8,6 +8,8 @@ sessions = {} // Holds one SessionStorage per test session
 const getTest = require('./functions/getTest')
 const submitTest = require('./functions/submitTest')
 const createTest = require('./functions/createTest')
+const createAccount = require('./functions/createAccount')
+const login = require('./functions/login')
 
 // Connecting to db
 mongoose.connect('mongodb://localhost:27017/tests', {useMongoClient: true})
@@ -17,10 +19,10 @@ app.set('trust proxy', 'loopback')
 
 // Setting up endpoints
 app.post('/getTest', getTest)
-
 app.post('/submitTest', submitTest)
-
 app.post('/createTest', createTest)
+app.post('/createAccount', createAccount)
+app.post('/login', login)
  
 // Start node server on port 3000
 app.listen(3000, function () {
