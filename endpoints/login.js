@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const body = require('body-parser')
 const User = require('../models/User')
-const mongoose = require('mongoose')
 
 const secretKey = 'lahgjskdj12379198ghqoqwie081e3130rhew08djf48ha13486129346183764'
 // ^ ultra secure xD
@@ -10,16 +9,24 @@ const secretKey = 'lahgjskdj12379198ghqoqwie081e3130rhew08djf48ha134861293461837
 // Logs in a user
 const login = (req, res) => {
 	const {email, password} = req.body
-	const valid = false // whether login is valid or not
+	let valid = false // whether login is valid or not
 	User.findOne({email}, (err, user) => {
 		valid = bcrypt.compareSync(password, user.password)
 
+		// Send them the authentication token if it's valid
 		if (valid) {
 			const token = jwt.sign({id: user._id}, secretKey)
 			res.send({token})
+
+			// Logging
+			console.log("User logged in: ", email)
 		}
 		else {
 			res.send("Invalid")
+			
+			// Logging
+			console.log("Invalid login: ", email)
+			console.log("Password: ", password)
 		}
 	})
 }
