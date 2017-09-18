@@ -20,11 +20,11 @@ app.set('trust proxy', 'loopback')
 app.use(bodyParser.json())
 
 // Setting up endpoints
-app.post('/getTest', getTest)
-app.post('/submitTest', submitTest)
-app.post('/createTest', createTest)
-app.post('/createAccount', createAccount)
-app.post('/login', login)
+app.post('/api/getTest', getTest)
+app.post('/api/submitTest', submitTest)
+app.post('/api/createTest', createTest)
+app.post('/api/createAccount', createAccount)
+app.post('/api/login', login)
  
 // Start node server on port 3000
 app.listen(3000, function () {
