@@ -11,6 +11,7 @@ const submitTest = require('./endpoints/submitTest')
 const createTest = require('./endpoints/createTest')
 const createAccount = require('./endpoints/createAccount')
 const login = require('./endpoints/login')
+const getResults = require('./endpoints/getResults')
 
 // Connecting to db
 mongoose.connect('mongodb://localhost:27017/tests', {useMongoClient: true})
@@ -25,6 +26,7 @@ app.post('/api/submitTest', submitTest)
 app.post('/api/createTest', createTest)
 app.post('/api/createAccount', createAccount)
 app.post('/api/login', login)
+app.post('/api/getResults', getResults)
  
 // Start node server on port 3000
 app.listen(3000, function () {

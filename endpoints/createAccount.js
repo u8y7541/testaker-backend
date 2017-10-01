@@ -28,7 +28,7 @@ const createAccount = (req, res) => {
 	user.save().then(() => res.send("Ok"))
 
 	// Logging
-	console.log("Account created: ", req.email)
+	console.log("Account created: ", req.body.email)
 }
 
 module.exports = createAccount

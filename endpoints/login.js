@@ -10,7 +10,17 @@ const secretKey = 'lahgjskdj12379198ghqoqwie081e3130rhew08djf48ha134861293461837
 const login = (req, res) => {
 	const {email, password} = req.body
 	let valid = false // whether login is valid or not
-	User.findOne({email}, (err, user) => {
+	User.findOne({'email': email}, (err, user) => {
+		if (!user) {
+			console.log("User not found, email: " + email)
+			res.send("User not found")
+			return;
+		}
+		if (err) {
+			console.log(err)
+			return;
+		}
+
 		valid = bcrypt.compareSync(password, user.password)
 
 		// Send them the authentication token if it's valid
@@ -22,7 +32,7 @@ const login = (req, res) => {
 			console.log("User logged in: ", email)
 		}
 		else {
-			res.send("Invalid")
+			res.send({token: "Invalid"})
 			
 			// Logging
 			console.log("Invalid login: ", email)

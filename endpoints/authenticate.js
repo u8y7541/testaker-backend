@@ -14,7 +14,7 @@ const authenticate = (req) => {
 		catch {
 			return false
 		}
-		return true
+		return user
 	}
 	return false
 }

@@ -19,7 +19,7 @@ const getTest = (req, res) => {
 
 			// Check if test doesn't exist
 			if (test === null) {
-				res.send(" ") // Saving bandwidth
+				res.send("Test doesn't exist") // Saving bandwidth
 				return 
 			}
 

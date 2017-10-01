@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const Test = require('../models/Test')
+const Score = require('../models/Score')
 const SessionStorage = require('../classes/SessionStorage')
 
 // Function to take submitted responses, grade them, and send back result
-const setTest = (req, res) => {
+const submitTest = (req, res) => {
 	// First check if the request is legit
 	if (!(req.query.id in sessions) || 
 		(req.query.answers === undefined) ||
@@ -34,6 +35,15 @@ const setTest = (req, res) => {
 			}
 			// Send the result
 			res.send(result)
+
+			// Save the result in the database
+			Score.create({
+				name: req.query.name,
+				ip: req.ip,
+				result,
+				testId: req.query.id,
+				timestamp: new Date()
+			}, (err)=>{if (err) {return handleError(err)}})
 		})
 
 	// Logging
@@ -43,4 +53,4 @@ const setTest = (req, res) => {
 	console.log()
 }
 
-module.exports = setTest
+module.exports = submitTest
