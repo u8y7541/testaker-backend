@@ -9,15 +9,16 @@ const getResults = (req, res) => {
 			return handleError(err)
 		}
 
+		// Check if there are no scores
 		if (scores === []) {
 			res.send("Invalid")
 			return
 		}
 
+		// Remove IPs before sending
 		results = scores.map((item) => {delete item.ip; return item})
+		res.send(results)
 	})
-
-	(results !== []) ? res.send(results):null
 }
 
 module.exports = getResults
