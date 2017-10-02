@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 // Test database model
 const Test = mongoose.model('Test', {
 	test: Array,
-	testId: String
+	testId: String,
+	createdBy: String
 }, 'tests')
 
 // IMPORTANT: This model is not actually being used right now.

@@ -6,15 +6,18 @@ const secretKey = 'lahgjskdj12379198ghqoqwie081e3130rhew08djf48ha134861293461837
 
 // JWT authentication check
 const authenticate = (req) => {
-	const token = req.get('Token')
+	const {token} = req.body
 	if (token) {
+		let user
 		try {
-			const user = jwt.verify(token, secretKey)
+			user = jwt.verify(token, secretKey).email
 		}
-		catch {
+		catch (err) {
 			return false
 		}
 		return user
 	}
 	return false
 }
+
+module.exports = authenticate

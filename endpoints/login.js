@@ -25,7 +25,7 @@ const login = (req, res) => {
 
 		// Send them the authentication token if it's valid
 		if (valid) {
-			const token = jwt.sign({id: user._id}, secretKey)
+			const token = jwt.sign({email: email, id: user._id}, secretKey)
 			res.send({token})
 
 			// Logging
