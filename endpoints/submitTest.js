@@ -26,6 +26,7 @@ const submitTest = (req, res) => {
 
 			// Grade the test
 			let result = {}
+			console.log(req.query.answers)
 			const answers = JSON.parse(req.query.answers)
 			for ([i, question] of test.test.entries()) {
 				if (question.freeResponse) {

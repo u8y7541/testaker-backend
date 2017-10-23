@@ -1,8 +1,29 @@
 const mongoose = require('mongoose')
 const Score = require('../models/Score')
+const Test = require('../models/Test')
+const authenticate = require('../utils/authenticate')
 
-// Get saved test results given 
-const getResults = (req, res) => {
+// Get saved test results
+const getResults = async (req, res) => {
+	// Check if authorized
+
+	let authorized = false
+	const user = authenticate(req)
+	let test = await Test.findOne({testId: req.query.id})
+
+	// Check if test exists
+	if (test==null) {
+		res.send("Invalid test ID")
+		return
+	}
+
+	authorized = (test.createdBy === user)
+	if (!authorized) {
+		res.send("Not authorized")
+		return
+	}
+
+	// Get the scores
 	let results = []
 	Score.find({testId: req.query.id}, (err, scores) => {
 		if (err) {
@@ -10,8 +31,8 @@ const getResults = (req, res) => {
 		}
 
 		// Check if there are no scores
-		if (scores === []) {
-			res.send("Invalid")
+		if (scores.length === 0) {
+			res.send("No scores")
 			return
 		}
 
