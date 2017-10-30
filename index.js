@@ -18,7 +18,6 @@ mongoose.connect('mongodb://localhost:27017/tests', {useMongoClient: true})
 
 // Initialize app
 const app = express()
-const io = require('socket.io')(require('http').Server(app, 3001))
 app.set('trust proxy', 'loopback')
 app.use(bodyParser.json())
 
@@ -31,8 +30,22 @@ app.post('/api/login', login)
 app.post('/api/getResults', getResults)
  
 // Setting up WebSockets
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+server.listen(3001)
+
+// Import websocket events
+const auth = require('./socketevents/auth')
+const getStatus = require('./socketevents/getStatus')
+
 io.on('connection', (socket) => {
-	socket.emit('Hello World')
+	console.log('Someone connected')
+	console.log()
+	
+	let user = false
+	let testID = null
+	socket.on('auth', (...args) => auth(socket, ...args))
+	socket.on('status', (...args) => getStatus(socket, ...args))
 })
 
 // Start node server on port 3000

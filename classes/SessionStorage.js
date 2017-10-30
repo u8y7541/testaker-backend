@@ -7,6 +7,7 @@ class SessionStorage {
 	constructor(testId) {
 		this.testId = testId
 		this.storage = [] 
+		this.removed = []
 	}
  
 	addEntry(name, ip) {
@@ -18,6 +19,7 @@ class SessionStorage {
 		this.storage.splice(
 			this.storage.map((item) => item[0] + item[1]).indexOf(name + ip),
 		1)
+		this.removed.push([name, ip])
 	}
 
 	// TODO: Make more efficient

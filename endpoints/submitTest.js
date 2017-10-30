@@ -16,6 +16,10 @@ const submitTest = (req, res) => {
 
 	// Remove test taker from the SessionStorage
 	sessions[req.query.id].removeEntry(req.query.name, req.ip)
+	// If everyone finished the test, get rid of the session
+	if (sessions[req.query.id].storage === []) {
+		delete sessions[req.query.id]
+	}
 
 	// Find the answer key, there should be only one with the required id
 	Test.findOne({"testId": req.query.id},
