@@ -17,7 +17,7 @@ const submitTest = (req, res) => {
 	// Remove test taker from the SessionStorage
 	sessions[req.query.id].removeEntry(req.query.name, req.ip)
 	// If everyone finished the test, get rid of the session
-	if (sessions[req.query.id].storage === []) {
+	if (sessions[req.query.id].storage.length === 0) {
 		delete sessions[req.query.id]
 	}
 

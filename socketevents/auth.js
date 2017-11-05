@@ -4,13 +4,10 @@ const authenticate = require('../utils/authenticate')
 
 // Websocket event code for "auth" event
 // Takes token and requested test ID and authorizes
-const auth = async (socket, token, id) => {
+const auth = async (socket, data) => {
 	// Check if token is valid
+	const {token, id} = data
 	user = authenticate({body:{token}})
-	if (!user) {
-		socket.emit('auth', "Not authorized")
-		return
-	}
 
 	// Check if user created the test
 	let authorized = false;

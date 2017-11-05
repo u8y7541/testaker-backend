@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const SessionStorage = require('./classes/SessionStorage')
 
@@ -18,6 +19,7 @@ mongoose.connect('mongodb://localhost:27017/tests', {useMongoClient: true})
 
 // Initialize app
 const app = express()
+app.options('*', cors())
 app.set('trust proxy', 'loopback')
 app.use(bodyParser.json())
 
