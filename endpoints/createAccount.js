@@ -3,16 +3,16 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
 // Creates a user account
-const createAccount = (req, res) => {
+const createAccount = async (req, res) => {
 	// Check if that user already exists
 	let userExists = false
-	User.findOne({email: req.body.email}, (err, user) => {
+	await User.findOne({email: req.body.email}, (err, user) => {
 		if (user) {
 			res.send("A user with that email already exists.")
 			userExists = true
 
 			// Logging
-			console.log("Invalid account creation: ", req.body.email)
+			console.log("Invalid account creation:", req.body.email)
 		}
 	})
 
@@ -28,7 +28,7 @@ const createAccount = (req, res) => {
 	user.save().then(() => res.send("Ok"))
 
 	// Logging
-	console.log("Account created: ", req.body.email)
+	console.log("Account created:", req.body.email)
 }
 
 module.exports = createAccount
