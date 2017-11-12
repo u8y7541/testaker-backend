@@ -32,7 +32,12 @@ app.post('/api/login', login)
 app.post('/api/getResults', getResults)
  
 // Setting up WebSockets
-const server = require('http').Server(app)
+const fs = require('fs')
+const https = require('https')
+const server = https.createServer({
+	key: fs.readFileSync('/etc/letsencrypt/live/www.testaker.com/privkey.pem'),
+	cert: fs.readFileSync('/etc/letsencrypt/live/www.testaker.com/cert.pem'),
+}, app)
 const io = require('socket.io')(server)
 server.listen(3001)
 
